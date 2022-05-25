@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 // CSS-in-JS
-
 interface CharacterProps {
   id: number;
   image: string;
@@ -10,7 +9,7 @@ interface CharacterProps {
 }
 
 const Character = () => {
-  const [character, setCharacter] = useState([]);
+  const [character, setCharacter] = useState<CharacterProps>([]);
 
   useEffect(() => {
     const fetchCharacter = () =>
@@ -24,7 +23,7 @@ const Character = () => {
 
   return (
     <>
-      <h2>Alguns personagens da série</h2>
+      <h2>Algunos personajes de la serie</h2>
       <section>
         {character.map((data: CharacterProps) => {
           return (

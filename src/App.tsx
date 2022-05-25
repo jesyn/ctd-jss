@@ -1,6 +1,6 @@
 import React from "react";
-import Banner from "./components/banner/index.tsx";
-import Character from "./components/cards/index.tsx";
+import Banner from "./components/banner/index";
+import Character from "./components/cards/index";
 import "./styles.css";
 
 const App = () => {
