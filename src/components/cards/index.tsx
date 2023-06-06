@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createUseStyles } from "react-jss";
 
 // CSS-in-JS
 interface CharacterProps {
@@ -8,8 +9,26 @@ interface CharacterProps {
   gender: string;
 }
 
+const styles = createUseStyles({
+  listCard: {
+    display: "flex",
+    gap: "15px",
+    flexWrap: "wrap",
+  },
+  card: {
+    border: "2px solid black",
+    borderRadius: "10px",
+    padding: "5px",
+  },
+  image: {
+    borderRadius: "10px",
+  },
+});
+
 const Character = () => {
-  const [character, setCharacter] = useState<CharacterProps>([]);
+  const [character, setCharacter] = useState<CharacterProps[]>([]);
+
+  const classes = styles();
 
   useEffect(() => {
     const fetchCharacter = () =>
@@ -24,11 +43,11 @@ const Character = () => {
   return (
     <>
       <h2>Algunos personajes de la serie</h2>
-      <section>
+      <section className={classes.listCard}>
         {character.map((data: CharacterProps) => {
           return (
-            <article key={data.id}>
-              <img src={data.image} alt={data.name} />
+            <article key={data.id} className={classes.card}>
+              <img src={data.image} alt={data.name} className={classes.image} />
               <div>
                 <h3>{data.name}</h3>
                 <h3>{data.gender}</h3>
