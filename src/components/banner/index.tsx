@@ -1,5 +1,6 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
+import styled from "styled-components";
 
 // CSS-in-JS
 
@@ -23,22 +24,61 @@ const styles = createUseStyles({
   },
 });
 
+// style components
+
+interface IButton {
+  textColor: string;
+  backColor: string;
+}
+
+const Title = styled.h1`
+  font-size: 30px;
+  text-align: center;
+`;
+
+const Text = styled.p`
+  text-align: center;
+`;
+
+const Button = styled.button<IButton>`
+  background-color: ${(props) => props.backColor};
+  color: ${(props) => props.textColor};
+  border-radius: 10px;
+  padding: 5px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+`;
+
 const Banner = () => {
-  const classes = styles();
+  //const classes = styles();
 
   return (
     <div>
-      <h1 className={classes.title}>Rick and Morty</h1>
-      <p className={classes.text}>
+      <Title /* className={classes.title} */>Rick and Morty</Title>
+      <Text /* className={classes.text} */>
         Rick and Morty es una serie animada para adultos de ciencia ficción y
         comedia estadounidense creada por Justin Roiland y Dan Harmon para el
         bloque de programación nocturna Adult Swim, transmitido en el canal
         Cartoon Network.
-      </p>
-      <div className={classes.buttonContainer}>
-        <button className={classes.button}>Ver el trailer</button>
-        <button className={classes.button}>Guardar en favoritos</button>
-      </div>
+      </Text>
+      <ButtonContainer /* className={classes.buttonContainer} */>
+        <Button
+          backColor={"lightblue"}
+          textColor={"black"} /* className={classes.button} */
+        >
+          Ver el trailer
+        </Button>
+        <Button
+          backColor={"lightgreen"}
+          textColor={"red"} /* className={classes.button} */
+        >
+          Guardar en favoritos
+        </Button>
+      </ButtonContainer>
     </div>
   );
 };

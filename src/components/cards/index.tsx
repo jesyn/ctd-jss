@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
+import styled from "styled-components";
 
 // CSS-in-JS
 interface CharacterProps {
@@ -25,6 +26,30 @@ const styles = createUseStyles({
   },
 });
 
+// style components
+interface IImage {
+  gender: string;
+}
+
+const ListCard = styled.section`
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+`;
+const Card = styled.article`
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 5px;
+`;
+
+const Image = styled.img`
+  border-radius: 10px;
+`;
+
+const Gender = styled.h3<IImage>`
+  color: ${(props) => (props.gender === "Female" ? "pink" : "blue")};
+`;
+
 const Character = () => {
   const [character, setCharacter] = useState<CharacterProps[]>([]);
 
@@ -43,19 +68,23 @@ const Character = () => {
   return (
     <>
       <h2>Algunos personajes de la serie</h2>
-      <section className={classes.listCard}>
+      <ListCard /* className={classes.listCard} */>
         {character.map((data: CharacterProps) => {
           return (
-            <article key={data.id} className={classes.card}>
-              <img src={data.image} alt={data.name} className={classes.image} />
+            <Card key={data.id} /* className={classes.card} */>
+              <Image
+                src={data.image}
+                alt={data.name}
+                /* className={classes.image} */
+              />
               <div>
                 <h3>{data.name}</h3>
-                <h3>{data.gender}</h3>
+                <Gender gender={data.gender}>{data.gender}</Gender>
               </div>
-            </article>
+            </Card>
           );
         })}
-      </section>
+      </ListCard>
     </>
   );
 };
